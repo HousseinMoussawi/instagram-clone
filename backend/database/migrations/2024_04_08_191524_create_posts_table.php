@@ -17,8 +17,6 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('caption');
             $table->string('file_path');
-            $table->integer('number_of_likes')->default(0);
-            $table->integer('number_of_comments')->default(0);
             $table->timestamps();
         });
     }

@@ -20,12 +20,4 @@ class Post extends Model
         return $this->hasMany(Like::class);
     }
 
-    public function commentsCount(){
-        return $this->comments()->count();
-    }
-
-    public function likesCount(){
-        return $this->likes()->count();
-    }
-
 }
