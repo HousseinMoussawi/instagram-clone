@@ -6,9 +6,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+
+class User extends Authenticatable implements JWTSubject
 {
     use  HasFactory, Notifiable;
 
@@ -32,13 +33,6 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class,'follows','follower_id','followed_id');
     }
     
-    public function followersCount(){
-        return $this->followers()->count();
-    }
-    
-    public function followedCount(){
-        return $this->followed()->count();
-    }
 
     public function posts(){
         return $this->hasMany(Post::class);
@@ -65,4 +59,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+
 }
