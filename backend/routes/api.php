@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,3 +36,7 @@ Route::controller(LikeController::class)->group(function () {
     Route::post('unlike' , 'destroy');
 });
 
+Route::controller(PostController::class)->group(function(){
+    Route::post('post','createPost');
+    Route::get('get_feed', 'getFeedPosts');
+});
