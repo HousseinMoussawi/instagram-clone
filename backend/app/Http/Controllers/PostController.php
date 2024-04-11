@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -16,11 +17,14 @@ class PostController extends Controller
 
         $user_id = auth()->user()->id;
 
-        $ost = Post::create([
+        Post::create([
             'user_id'=> $user_id,
-            
+            'caption'=>$req->caption,
+            'file_path'=>$req->file_path,
+        ]);
 
-        ])
-
+        return response()->json([
+            'status'=>'success',
+            'message'=>'post created successfully'],201);
     }
 }
