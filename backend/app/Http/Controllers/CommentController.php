@@ -24,6 +24,15 @@ class CommentController extends Controller
         
     }
 
+    public function getPostComments(Request $req){
+        $comments = Comment::where('post_id', $req->post_id)->get();
+
+        return response()->json([
+            'message'=>'got comments successfully',
+            'comments'=>$comments,
+    ]);
+    } 
+
     public function destroy (Request $req)
     {
         $comment = Comment::where('user_id',auth()->user()->id)->where('post_id', $req->id)->first();

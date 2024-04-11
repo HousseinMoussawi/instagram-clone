@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
@@ -25,7 +26,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
 });
 
-
 Route::controller(FollowsController::class)->group(function () {
     Route::post('follow' , 'follow');
     Route::post('unfollow' , 'destroy');
@@ -40,3 +40,9 @@ Route::controller(PostController::class)->group(function(){
     Route::post('post','createPost');
     Route::get('get_feed', 'getFeedPosts');
 });
+
+Route::controller(CommentController::class)->group(function(){
+    Route::post('commnt','comment');
+    Route::post('delete_comment','destroy');
+});
+
