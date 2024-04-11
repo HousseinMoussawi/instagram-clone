@@ -9,9 +9,17 @@ use App\Models\Follows;
 
 class UserController extends Controller
 {
-    public function getUser(Request $id){
-        
+    public function getUser(){
+        $user = User::where('id',auth()->user()->id);
+
+        return response()->json(['message'=> 'retreived user successfully',
+    'user'=>$user],200);
+
     }
+
+    
+
+
 
     public function suggestions(){
         
@@ -24,9 +32,6 @@ class UserController extends Controller
         else{
         $followed = Follows::where('follower_id',$user->id)->pluck('followed_id');
         $followedFollowed = Follows::whereIn('follower_id',$followed)->pluck('followed_id');
-
-
-        
 
 
         $suggestions = User::whereIn('id',$followedFollowed)->whereNotIn('id', $followed)->get();
