@@ -27,4 +27,24 @@ class PostController extends Controller
             'status'=>'success',
             'message'=>'post created successfully'],201);
     }
+
+    public function getFeedPosts(){
+        $posts = Post::whereIn('user_id', function ($query)  {
+            $query->select('followed_id')
+                  ->from('follows')
+                  ->where('follower_id', auth()->user()->id);
+        })
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        if(!$posts)
+        return response()->json(['message'=>'no followed users or followerd users have not posts yet']);
+
+
+        return response()->json([
+            'message'=>'posts retreived successfully',
+            'posts'=>$posts,
+        ]);
+
+    }
 }
