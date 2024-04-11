@@ -22,4 +22,6 @@ class FollowsController extends Controller
         $follow->delete();
         return response()->json(['message'=>'unfollowed the user successfully'],204);
     }
+
+    
 }

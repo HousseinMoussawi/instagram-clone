@@ -42,7 +42,8 @@ Route::controller(PostController::class)->group(function(){
 });
 
 Route::controller(CommentController::class)->group(function(){
-    Route::post('commnt','comment');
+    Route::post('comment','comment');
+    Route::post('get_post_comments','getPostComments');
     Route::post('delete_comment','destroy');
 });
 
