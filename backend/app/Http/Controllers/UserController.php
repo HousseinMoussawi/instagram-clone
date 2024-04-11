@@ -17,8 +17,18 @@ class UserController extends Controller
 
     }
 
-    
+    public function updateUser(Request $req){
+        $req->validate([
+        'image_path'=>'required',
+        ]);
 
+        $user = auth()->user();
+
+        $user->image_path = $req->image_path;
+
+        return response()->json(['message'=> 'user update successfully'],200);
+        
+    }
 
 
     public function suggestions(){
