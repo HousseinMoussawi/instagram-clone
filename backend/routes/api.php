@@ -51,5 +51,5 @@ Route::controller(CommentController::class)->group(function(){
 Route::controller(UserController::class)->group(function(){
     Route::get('get_follow_suggestions','suggestions');
     Route::get('get_user','getUser');
-    Route::post('update_user','updateUser')
+    Route::post('update_user','updateUser');
 });
