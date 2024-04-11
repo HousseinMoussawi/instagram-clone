@@ -6,6 +6,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,3 +48,6 @@ Route::controller(CommentController::class)->group(function(){
     Route::post('delete_comment','destroy');
 });
 
+Route::controller(UserController::class)->group(function(){
+    Route::get('get_follow_suggestions','suggestions');
+});

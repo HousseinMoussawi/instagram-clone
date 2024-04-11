@@ -15,15 +15,21 @@ class UserController extends Controller
 
     public function suggestions(){
         
-        $user = auth()->user()->id;
-        if(!$user->followed()){
+        $id = auth()->user()->id;
+        $user = User::find($id);
+        if(!$user->following()){
             $suggestions = User::all();
         }
 
         else{
-        $followed = Follows::where('follower_id',auth()->user()->id)->pluck('followed_id');
+        $followed = Follows::where('follower_id',$user->id)->pluck('followed_id');
         $followedFollowed = Follows::whereIn('follower_id',$followed)->pluck('followed_id');
-        $suggestions = User::whereIn('id',$followedFollowed)->whereNotIn('id',$user->followed->followed_id)->get();
+
+
+        
+
+
+        $suggestions = User::whereIn('id',$followedFollowed)->whereNotIn('id', $followed)->get();
         }
         
         return response()->json(['message'=>'got suggestions successfully',
