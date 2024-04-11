@@ -13,12 +13,12 @@ class LikeController extends Controller
        $like->post_id = $req->post_id;
        $like->save();
        
-       return response()->json(['message'=>'followed the user successfuly'],200);
+       return response()->json(['message'=>'followed the user successfuly'],201);
     }
 
     public function destroy(Request $req){
         $follow = Like::where('user_id',$req->auth()->user()->id)->where('post_id',$req->post_id)->first();
         $follow->delete();
-        return response()->json(['message'=>'like removed successfully'],200);
+        return response()->json(['message'=>'like removed successfully'],204);
     }
 }

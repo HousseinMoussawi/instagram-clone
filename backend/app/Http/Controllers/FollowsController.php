@@ -20,6 +20,6 @@ class FollowsController extends Controller
         $follow = Follows::where('follower_id',auth()->user()->id)->where('followed_id',$req->followed_id)->first();
 
         $follow->delete();
-        return response()->json(['message'=>'unfollowed the user successfully']);
+        return response()->json(['message'=>'unfollowed the user successfully'],204);
     }
 }
